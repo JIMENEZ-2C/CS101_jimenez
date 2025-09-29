@@ -80,7 +80,7 @@ the output is:
  first second
      3      0
 b. Write the code and its output.
-```{r setup, include=FALSE}
+```{r setup, include=FALSE} 
 x[c("first", "second")]
 # first second
 #     3      0
