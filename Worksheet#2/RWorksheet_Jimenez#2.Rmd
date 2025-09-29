@@ -108,3 +108,7 @@ x[2] <- 0
 x
 #[1] -3  0 -1  0  1  2
 ```
+system('git config user.name "JIMENEZ-2C"')
+system('git config user.email "kenanjake.jimenez@students.isatu.edu.ph"')
+
+
