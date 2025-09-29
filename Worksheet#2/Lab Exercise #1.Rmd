@@ -1,0 +1,17 @@
+---
+title: 'Lab Exercise #1'
+author: "Kenan Jake Jimenez"
+date: "2025-09-29"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exercise 1 Create a vector using : operator
+a. Sequence from -5 to 5. Write the R code and its output. Describe its output.
+```{r setup, include=FALSE}
+y <- C(-5:5)
+print(y)
+```
