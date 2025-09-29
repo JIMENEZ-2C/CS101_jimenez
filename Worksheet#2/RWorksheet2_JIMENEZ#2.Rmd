@@ -79,7 +79,7 @@ x[c("first", "second")]
 the output is:
  first second
      3      0
-b. Write the code and its output.
+b. Write the code and its output. 
 ```{r setup, include=FALSE} 
 x[c("first", "second")]
 # first second
