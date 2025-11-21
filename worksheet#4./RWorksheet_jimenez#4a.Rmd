@@ -1,0 +1,199 @@
+---
+title: 'Work sheet #4b'
+author: "Kenan Jake Jimenez"
+date: "2025-10-13"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#1.The table below shows the data about shoe size and height. Create a data frame.
+```{r}
+shoe <- c(6.5,9.0,8.5,8.5,10.5,7.0,9.5,9.0,13.0,7.5,10.5,8.5,12.0,10.5,
+          13.0,11.5,8.5,5.0,10.0,6.5,8.5,10.5,6.5,10.5,11.0,9.0,13.0)
+
+height <- c(66.0,68.0,64.5,65.0,70.0,64.0,70.0,71.0,72.0,
+            64.0,74.5,67.0,71.0,71.0,77.0,72.0,59.0,62.0,72.0,66.0,64.0,
+            73.0,69.0,72.0,71.0,69.0,70.0)
+
+gender <- c("F","F","F","M","M","F","F","F","F","M","M","F","M","M",
+            "M","F","F","M","M","F","F","M","M","M","M","M","M")
+
+df <- data.frame(shoe, height, gender)
+df
+```
+#a. Describe the data.
+
+#The dataset contains 27 respondents, and each person has three variables 
+#recorded: shoe size, height, and gender. Shoe size and height are numerical 
+#variables, while gender is a categorical factor with two levels 
+#(Male and Female). The data reflects basic anthropometric measurements 
+#commonly used to compare physical characteristics across groups.
+
+#b. Create a subset by males and females with their corresponding shoe size and height.
+#What its result? Show the R scripts.
+```{r}
+male_data <- subset(df, gender == "M", select = c(shoe, height, gender))
+female_data <- subset(df, gender == "F", select = c(shoe, height, gender))
+
+male_data
+female_data
+```
+#c. Find the mean of shoe size and height of the respondents. Write the R scripts and its
+#result.
+```{r}
+mean_shoe <- mean(df$Shoe_size)
+mean_height <- mean(df$Height)
+
+mean_shoe
+mean_height
+```
+#d. Is there a relationship between shoe size and height? Why?
+
+Yes. In general, larger shoe sizes tend to appear with greater heights in the 
+dataset. This relationship is expected because shoe size is partly correlated
+with body proportions, and taller individuals typically have larger feet. 
+While this dataset shows a pattern, a statistical method such as correlation analysis #would confirm the strength of the relationship more rigorously.
+
+#2. Construct character vector months to a factor with factor() and assign the result to
+#factor_months_vector. Print out factor_months_vector and assert that R prints out
+#the factor levels below the actual values.
+```{r}
+months_vector <- c(
+  "March","April","January","November","January",
+  "September","October","September","November","August",
+  "January","November","November","February","May","August",
+  "July","December","August","August","September","November","February",
+  "April"
+)
+factor_months_vector <- factor(months_vector)
+factor_months_vector
+```
+
+#3. Then check the summary() of the months_vector and factor_months_vector. | Inter-
+#pret the results of both vectors. Are they both equally useful in this case?
+```{r}
+summary(months_vector)
+summary(factor_months_vector)
+```
+#No. The character vector simply stores text and cannot summarize categories.
+#The factor version groups identical values and provides counts, which is more useful for analysis especially for categorical data like months.
+#Therefore, the factor is much more useful when studying frequency, patterns, or performing statistical analysis.
+
+#4. Create a vector and factor for the table below.
+```{r}
+factor_data <- c("East", rep("West", 4), rep("North", 3))
+factor_data
+
+new_order_data <- factor(factor_data, levels = c("East", "West", "North"))
+print(new_order_data)
+
+```
+
+#5. Enter the data below in Excel with file name = import_march.csv
+```{r}
+import_march <- read.table("import_march.csv", header = TRUE, sep = ",")
+import_march
+
+```
+
+#Using Conditional Statements (IF-ELSE)
+#6. Full Search
+```{r}
+num <- as.integer(readline("Select a number from 1 to 50: "))
+
+cat("Chosen number:", num, "\n")
+
+if (is.na(num)) {
+  cat("Invalid input. Please enter a number.\n")
+  
+} else if (num < 1 || num > 50) {
+  cat("The number selected is beyond the range of 1 to 50\n")
+  
+} else if (num == 20) {
+  print(TRUE)
+  
+} else {
+  print(num)
+}
+
+```
+
+#7. Change
+```{r}
+min_bills <- function(price) {
+  bills <- c(1000, 500, 200, 100, 50)
+  
+  remaining <- price
+  count <- 0
+  
+  for (b in bills) {
+    if (remaining >= b) {
+      count <- count + (remaining %/% b)
+      remaining <- remaining %% b
+    }
+  }
+  
+  return(count)
+}
+
+```
+
+#8. The following is each student’s math score for one semester. Based on this, answer the
+#following questions.
+
+#a. Create a dataframe from the above table. Write the R codes and its output.
+```{r}
+students <- data.frame(
+  Name = c("Annie", "Thea", "Steve", "Hanna"),
+  Grade1 = c(85, 65, 75, 95),
+  Grade2 = c(65, 75, 55, 75),
+  Grade3 = c(85, 90, 80, 100),
+  Grade4 = c(100, 90, 85, 90)
+)
+
+students
+```
+#b.
+```{r}
+for (i in 1:nrow(students)) {
+  avg <- (students$Grade1[i] + students$Grade2[i] +
+          students$Grade3[i] + students$Grade4[i]) / 4
+  
+  if (avg > 90) {
+    cat(students$Name[i], "'s average grade this semester is ", avg, ".\n", sep="")
+  }
+}
+```
+
+#c.
+```{r}
+tests <- students[, 2:5]
+
+for (j in 1:4) {
+  total <- sum(tests[, j])
+  avg <- total / nrow(tests)
+
+  if (avg < 80) {
+    cat("The", j, "th test was difficult.\n")
+  }
+}
+```
+#d
+```{r}
+for (i in 1:nrow(students)) {
+  grades <- students[i, 2:5]
+  highest <- grades[1]
+
+  for (g in grades) {
+    if (g > highest) highest <- g
+  }
+  
+  if (highest > 90) {
+    cat(students$Name[i], "'s highest grade this semester is ", highest, ".\n", sep="")
+  }
+}
+
+```
