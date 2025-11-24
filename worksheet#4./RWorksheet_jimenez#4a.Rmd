@@ -11,84 +11,79 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #1.The table below shows the data about shoe size and height. Create a data frame.
 ```{r}
-shoe <- c(6.5,9.0,8.5,8.5,10.5,7.0,9.5,9.0,13.0,7.5,10.5,8.5,12.0,10.5,
+S <- c(6.5,9.0,8.5,8.5,10.5,7.0,9.5,9.0,13.0,7.5,10.5,8.5,12.0,10.5,
           13.0,11.5,8.5,5.0,10.0,6.5,8.5,10.5,6.5,10.5,11.0,9.0,13.0)
 
-height <- c(66.0,68.0,64.5,65.0,70.0,64.0,70.0,71.0,72.0,
+H <- c(66.0,68.0,64.5,65.0,70.0,64.0,70.0,71.0,72.0,
             64.0,74.5,67.0,71.0,71.0,77.0,72.0,59.0,62.0,72.0,66.0,64.0,
             73.0,69.0,72.0,71.0,69.0,70.0)
 
-gender <- c("F","F","F","M","M","F","F","F","F","M","M","F","M","M",
+G <- c("F","F","F","M","M","F","F","F","F","M","M","F","M","M",
             "M","F","F","M","M","F","F","M","M","M","M","M","M")
 
-df <- data.frame(shoe, height, gender)
-df
+DF <- data.frame(S, H, G)
+DF
 ```
-#a. Describe the data.
 
-#The dataset contains 27 respondents, and each person has three variables 
-#recorded: shoe size, height, and gender. Shoe size and height are numerical 
-#variables, while gender is a categorical factor with two levels 
-#(Male and Female). The data reflects basic anthropometric measurements 
-#commonly used to compare physical characteristics across groups.
+#a. Describe the data.
+```{r}
+"The dataset is made up of 27 entries, and for each person, three types of information were collected: how tall they are, their shoe measurement, and whether they are male or female. Height and shoe size are both recorded as numeric values, while gender is listed as a category with two possible labels. Overall, it’s a simple set of physical measurements that can be used to compare traits between the two groups."
+```
 
 #b. Create a subset by males and females with their corresponding shoe size and height.
 #What its result? Show the R scripts.
 ```{r}
-male_data <- subset(df, gender == "M", select = c(shoe, height, gender))
-female_data <- subset(df, gender == "F", select = c(shoe, height, gender))
+M_data <- subset(DF, G == "M", select = c(S, H, G))
+F_data <- subset(DF, G == "F", select = c(S, H, G))
 
-male_data
-female_data
+M_data
+F_data
 ```
 #c. Find the mean of shoe size and height of the respondents. Write the R scripts and its
 #result.
 ```{r}
-mean_shoe <- mean(df$Shoe_size)
-mean_height <- mean(df$Height)
+S_mean <- mean(DF$S)
+H_mean <- mean(DF$H)
 
-mean_shoe
-mean_height
+S_mean
+H_mean
 ```
-#d. Is there a relationship between shoe size and height? Why?
 
-Yes. In general, larger shoe sizes tend to appear with greater heights in the 
-dataset. This relationship is expected because shoe size is partly correlated
-with body proportions, and taller individuals typically have larger feet. 
-While this dataset shows a pattern, a statistical method such as correlation analysis #would confirm the strength of the relationship more rigorously.
+#d. Is there a relationship between shoe size and height? Why?
+```{r}
+"Yeah, in general, people with bigger shoe sizes in the dataset also tend to be taller. That makes sense because shoe size is usually related to body proportions—taller people often have bigger feet. You can see the pattern in the data, but if you want to be sure how strong the relationship really is, you’d need to run something like a correlation analysis."
+```
 
 #2. Construct character vector months to a factor with factor() and assign the result to
 #factor_months_vector. Print out factor_months_vector and assert that R prints out
 #the factor levels below the actual values.
 ```{r}
-months_vector <- c(
+M_vector <- c(
   "March","April","January","November","January",
   "September","October","September","November","August",
   "January","November","November","February","May","August",
   "July","December","August","August","September","November","February",
   "April"
 )
-factor_months_vector <- factor(months_vector)
-factor_months_vector
+factor_Mvector <- factor(M_vector)
+factor_Mvector
 ```
 
-#3. Then check the summary() of the months_vector and factor_months_vector. | Inter-
-#pret the results of both vectors. Are they both equally useful in this case?
+#3. Then check the summary() of the months_vector and factor_months_vector. Interpret the results of both vectors. Are they both equally useful in this case?
 ```{r}
-summary(months_vector)
-summary(factor_months_vector)
+summary(M_vector)
+summary(factor_Mvector)
+
+"No, A regular character vector is basically just a list of words, it doesn’t tell you how often something shows up. But once you turn it into a factor, R automatically groups the repeated values and keeps track of their counts. That makes it way more useful when you’re dealing with categories, like months, and want to check patterns or how many times each one appears. So overall, the factor format is a lot more helpful for actual analysis."
 ```
-#No. The character vector simply stores text and cannot summarize categories.
-#The factor version groups identical values and provides counts, which is more useful for analysis especially for categorical data like months.
-#Therefore, the factor is much more useful when studying frequency, patterns, or performing statistical analysis.
 
 #4. Create a vector and factor for the table below.
 ```{r}
-factor_data <- c("East", rep("West", 4), rep("North", 3))
-factor_data
+F_data <- c("East", rep("West", 4), rep("North", 3))
+F_data
 
-new_order_data <- factor(factor_data, levels = c("East", "West", "North"))
-print(new_order_data)
+New_data <- factor(F_data, levels = c("East", "West", "North"))
+print(New_data)
 
 ```
 
@@ -123,7 +118,7 @@ if (is.na(num)) {
 
 #7. Change
 ```{r}
-min_bills <- function(price) {
+Min_bills <- function(price) {
   bills <- c(1000, 500, 200, 100, 50)
   
   remaining <- price
@@ -141,8 +136,7 @@ min_bills <- function(price) {
 
 ```
 
-#8. The following is each student’s math score for one semester. Based on this, answer the
-#following questions.
+#8. The following is each student’s math score for one semester. Based on this, answer the following questions.
 
 #a. Create a dataframe from the above table. Write the R codes and its output.
 ```{r}
@@ -156,7 +150,7 @@ students <- data.frame(
 
 students
 ```
-#b.
+#b. Without using the rowMean function, output the average score of students whose average math score over 90 points during the semester. write R code and its output.
 ```{r}
 for (i in 1:nrow(students)) {
   avg <- (students$Grade1[i] + students$Grade2[i] +
@@ -168,7 +162,7 @@ for (i in 1:nrow(students)) {
 }
 ```
 
-#c.
+#c. Without using the mean function, output as follows for the tests in which the average score was less than 80 out of 4 tests.
 ```{r}
 tests <- students[, 2:5]
 
@@ -181,7 +175,7 @@ for (j in 1:4) {
   }
 }
 ```
-#d
+#d. Without using the max function, output as follows for students whose highest score for a semester exceeds 90 points.
 ```{r}
 for (i in 1:nrow(students)) {
   grades <- students[i, 2:5]
