@@ -13,157 +13,141 @@ knitr::opts_chunk$set(echo = TRUE)
 
 a. Write the codes.
 ```{r}
-household <- data.frame(
-  Sex = c("Male", "Female", "Female", "Male", "Male",
+household_df <- data.frame(
+  sex = c("Male", "Female", "Female", "Male", "Male",
           "Female", "Female", "Male", "Female", "Male",
           "Male", "Female", "Male", "Female", "Male",
           "Female", "Male", "Female", "Female", "Male"),
   
-  Fathers_Occupation = c("Farmer", "Driver", "Others", "Farmer", "Driver",
+  fathers_occupation = c("Farmer", "Driver", "Others", "Farmer", "Driver",
                         "Farmer", "Others", "Driver", "Farmer", "Others",
                         "Driver", "Farmer", "Driver", "Others", "Farmer",
                         "Driver", "Others", "Farmer", "Driver", "Others"),
   
-  Persons_at_Home = c(5, 6, 4, 7, 5,
+  persons_at_home = c(5, 6, 4, 7, 5,
                       8, 3, 6, 5, 4,
                       6, 5, 4, 7, 5,
                       6, 5, 4, 3, 4),
   
-  Siblings_at_school = c(3, 5, 2, 6, 4,
+  siblings_at_school = c(3, 5, 2, 6, 4,
                      7, 3, 5, 4, 2,
                      6, 5, 3, 7, 4,
                      6, 5, 4, 2, 3),
     
-  Type_of_House = c("Wood", "Concrete", "Semi-Concrete", "Wood", "Concrete",
+  type_of_house = c("Wood", "Concrete", "Semi-Concrete", "Wood", "Concrete",
                     "Wood", "Semi-Concrete", "Concrete", "Wood", "Semi-Concrete",
                     "Concrete", "Wood", "Semi-Concrete", "Concrete", "Wood",
                     "Semi-Concrete", "Concrete", "Wood", "Concrete", "Semi-Concrete")
 
 )
 
-household
+household_df
 
 ```
 
 b. Describe the data. Get the structure or the summary of the data
 ```{r}
-str(household)
-summary(household)
+str(household_df)
+summary(household_df)
 ```
 
 c. Is the mean number of siblings attending is 5?
 ```{r}
-mean(household$Siblings_at_school)
-mean(household$Siblings_at_school) == 5
+mean(household_df$siblings_at_school)
 ```
 
 d. Extract the 1st two rows and then all the columns using the subsetting functions. Write the codes and its output.
 ```{r}
-household[1:2, ]
+household_df[1:2, ]
 ```
 
 e. Extract 3rd and 5th row with 2nd and 4th column. Write the codes and its result.
 ```{r}
-household[c(3,5), c(2,4)]
+household_df[c(3,5), c(2,4)]
 ```
 
 f. Select the variable types of houses then store the vector that results as types_houses.
 Write the codes.
 ```{r}
-types_houses <- household$Type_of_House
-types_houses
+type_houses <- household_df$type_of_house
+type_houses
 ```
 g. Select only all Males respondent that their father occupation was farmer. Write the
 codes and its output.
 ```{r}
-subset_males_farmer <- household[household$Sex == "Male" & household$Father_Occupation == "Farmer", ]
-print(subset_males_farmer)
+subset_males_farmer <- subset(household_df, sex == "Male" & fathers_occupation == "Farmer")
+subset_males_farmer
 ```
 
 h. Select only all females respondent that have greater than or equal to 5 number of siblings attending school. Write the codes and its outputs.
 ```{r}
-subset(household, Sex == "Female" & Siblings_at_school >= 5)
+subset(household_df, sex == "Female" & siblings_at_school >= 5)
 ```
 
 #2. Write a R program to create an empty data frame. Using the following codes:
 a. Describe the results.
 ```{r}
-df = data.frame(
-  Ints = integer(),
-  Doubles = double(),
-  Characters = character(),
-  Logicals = logical(),
-  Factors = factor(),
-  stringsAsFactors = FALSE
+df <- data.frame(
+Ints = integer(),
+Doubles = double(),
+Characters = character(),
+Logicals = logical(),
+Factors = factor(),
+stringsAsFactors = FALSE
 )
 
-print("Structure of the empty dataframe:")
-print(str(df))
-
+str(df)
 ```
 
 #3. Create a .csv file of this. Save it as HouseholdData.csv
 
 a. Import the csv file into the R environment. Write the codes.
 ```{r}
-write.csv(household, "HouseholdData.csv", row.names = FALSE)
+write.csv(household_df, "HouseholdData.csv", row.names = FALSE)
 
 data <- read.csv("HouseholdData.csv")
-
-print(data)
+data
 ```
 
 b. Convert the Sex into factor using factor() function and change it into integer.[Legend: Male = 1 and Female = 2]. Write the R codes and its output.
 ```{r}
-data$Sex <- factor(data$Sex, levels = c("Male", "Female"), labels = c(1, 2))
-data$Sex <- as.integer(data$Sex)
+data$sex <- factor(data$sex, levels = c("Male", "Female"), labels = c(1, 2))
+data$sex <- as.integer(data$sex)
 data
 ```
 
 c. Convert the Type of Houses into factor and change it into integer. [Legend: Wood
 = 1; Congrete = 2; Semi-Congrete = 3]. Write the R codes and its output.
 ```{r} 
-data$Type_of_House <- trimws(data$Type_of_House)
-
-data$Type_of_House <- factor(data$Type_of_House,
-                             levels = c("Wood", "Concrete", "Semi-Concrete"),
-                             labels = c(1, 2, 3))
-
-data$Type_of_House <- as.integer(data$Type_of_House)
-
-data$Type_of_House
-
+data$type_of_house <- factor(data$type_of_house,
+levels = c("Wood", "Concrete", "Semi-Concrete"),
+labels = c(1, 2, 3))
+data$type_of_house <- as.integer(data$type_of_house)
+data$type_of_house
 
 ```
 
 d. On father’s occupation, factor it as Farmer = 1; Driver = 2; and Others = 3. What
 is the R code and its output?
 ```{r}
-data$Fathers_Occupation <- factor(data$Fathers_Occupation, levels = c("Farmer", "Driver", "Others"), labels = c(1, 2, 3))
-data$Fathers_Occupation <- as.integer(data$Fathers_Occupation)
-
+data$fathers_occupation <- factor(data$fathers_occupation,
+levels = c("Farmer","Driver","Others"),
+labels = c(1,2,3))
+data$fathers_occupation <- as.integer(data$fathers_occupation)
 data
 ```
 
 e. Select only all females respondent that has a father whose occupation is driver. Write
 the codes and its output.
 ```{r}
-female_driver <- subset(data, Sex == 2 & Fathers_Occupation == 2)
-
-print(female_driver)
+subset(data, sex == 2 & fathers_occupation == 2)
 ```
 
 f. Select the respondents that have greater than or equal to 5 number of siblings attending
 school. Write the codes and its output.
 ```{r}
-siblings5 <- subset(data, Siblings_at_school >= 5)
-
-print(siblings5)
+subset(data, siblings_at_school >= 5)
 ```
 
 #4. Interpret the graph.
 The graph in general indicates that the majority of respondents reside in wooden houses, then concrete and semi-concrete homes. Wooden house residents tend to have more school-going siblings, implying that big families are prevalent in such dwellings.
-
-On the contrary, people who live in concrete houses typically have fewer siblings, which may indicate smaller families and possibly a higher economic class.
-
-Generally, the trend in the graph indicates that there could be a connection between housing type and family size—families are likely to have smaller houses if they are large in number.
