@@ -13,8 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Hint Use abs() function to get the absolute
 ```{r}
-# Define the vector
-vectorA <- 1:5
+vector <- 1:5
 matrix_result <- matrix(0, nrow = 5, ncol = 5)
 
 for (i in 1:5) {
@@ -40,7 +39,7 @@ for (i in 1:5) {
 
 #3. Get an input from the user to print the Fibonacci sequence starting from the 1st input up to 500. Use repeat and break statements. Write the R Scripts and its output.
 ```{r}
-fib_sequence <- function() {
+fibonacci_sequence <- function() {
   start <- as.integer(readline(prompt = "Enter starting number: "))
   
   if (start <= 0) {
@@ -87,14 +86,14 @@ head(data)
 b. Create a subset for gender(female and male). How many observations are there in
 Male? How about in Female? Write the R scripts and its output.
 ```{r}
-male_data <- subset(data, Students == "Male")
-female_data <- subset(data, Students == "Female")
+male_students_data <- subset(data, Students == "Male")
+female_students_data <- subset(data, Students == "Female")
 
-male_count <- nrow(male_data)
-female_count <- nrow(female_data)
+male_students_count <- nrow(male_students_data)
+female_students_count <- nrow(female_students_data)
 
-cat("Number of Male observations:", male_count, "\n")
-cat("Number of Female observations:", female_count, "\n\n")
+cat("Number of Male observations:", male_students_count, "\n")
+cat("Number of Female observations:", female_students_count, "\n\n")
 
 ```
 
@@ -102,10 +101,10 @@ c. Create a graph for the number of males and females for Household Data. Use pl
 chart type = barplot. Make sure to place title, legends, and colors. Write the R scripts and
 its result.
 ```{r}
-gender_counts <- table(data$Students)
+Gender_Counts <- table(data$Students)
 
 barplot(
-  gender_counts,
+  Gender_Counts,
   main = "Number of Male and Female Observations",
   xlab = "Gender",
   ylab = "Count",
@@ -120,14 +119,14 @@ barplot(
 a. Create a piechart that will include labels in percentage.Add some colors and title of
 the chart. Write the R scripts and show its output.
 ```{r}
-expenses <- c(60, 10, 5, 25)
-categories <- c("Food", "Electricity", "Savings", "Miscellaneous")
+Expenses <- c(60, 10, 5, 25)
+Categories <- c("Food", "Electricity", "Savings", "Miscellaneous")
 
-percent <- round(expenses / sum(expenses) * 100)
-labels <- paste(categories, percent, "%")
+Percent <- round(Expenses / sum(Expenses) * 100)
+Labels <- paste(Categories, Percent, "%")
 
-pie(expenses,
-    labels = labels,
+pie(Expenses,
+    Labels = Labels,
     col = c("orange", "skyblue", "lightgreen", "pink"),
     main = "Monthly Income Distribution of Dela Cruz Family")
 ```
@@ -142,22 +141,22 @@ str(iris)
 
 b. Create an R object that will contain the mean of the sepal.length,sepal.width,petal.length,and petal.width. What is the R script and its result?
 ```{r}
-iris_means <- data.frame(
+IrisMeans <- data.frame(
   Sepal.Length = mean(iris$Sepal.Length),
   Sepal.Width = mean(iris$Sepal.Width),
   Petal.Length = mean(iris$Petal.Length),
   Petal.Width = mean(iris$Petal.Width)
 )
-print(iris_means)
+print(IrisMeans)
 ```
 
 c. Create a pie chart for the Species distribution. Add title, legends, and colors. Write the R script and its result.
 ```{r}
-species_counts <- table(iris$Species)
-pie(species_counts,
+SpeciesCounts <- table(iris$Species)
+pie(SpeciesCounts,
     main = "Iris Species Distribution",
     col = c("red", "blue", "green"),
-    labels = paste(names(species_counts), species_counts))
+    labels = paste(names(SpeciesCounts), SpeciesCounts))
 ```
 
 d.Subset the species into setosa, versicolor, and virginica. Write the R scripts
@@ -200,7 +199,7 @@ legend("topright",
 
 f. Interpret the result.
 ```{r}
-"The scatterplot shows that the three kinds of Iris flowers have different sepal sizes. The red dots (Setosa) have shorter and wider sepals, so they stay together in one group. The blue dots (Versicolor) and green dots (Virginica) look a bit the same, but the green ones usually have longer sepals. This means we can tell Setosa apart easily, but Versicolor and Virginica are a little harder to tell apart."
+"The scatterplot shows that the three Iris flower types have different sepal sizes. The red dots (Setosa) have short but wide sepals, so they bunch up in one spot. The blue (Versicolor) and green (Virginica) dots look pretty similar, but the green ones usually have longer sepals. So, it’s easy to spot Setosa, but telling Versicolor and Virginica apart is a bit trickier."
 ```
 
 #7. Import the alexa-file.xlsx. Check on the variations. Notice that there are ex-tra whitespaces among black variants (Black Dot, Black Plus, Black Show, BlackSpot). Also on the white variants (White Dot, White Plus, White Show, White Spot).
@@ -210,7 +209,7 @@ a. Rename the white and black variants by using gsub() function.
 library(readxl)
 library(dplyr)
 
-alexa <- read_xlsx("alexa-file.xlsx")
+alexa <- read_xlsx("alexa_file.xlsx")
 
 alexa$variation <- gsub("Black  Dot", "Black Dot", alexa$variation)
 alexa$variation <- gsub("Black  Plus", "Black Plus", alexa$variation)
